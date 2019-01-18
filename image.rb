@@ -1,4 +1,7 @@
 class Image
+
+  # Here is my initializer. It is formatted per the spec from Coding Boot Camp that the array should be made from 4 arrays
+  # or a two-dimensional array.
   def initialize(arr1, arr2, arr3, arr4)
     @image = []
     @row1 = [arr1]
@@ -6,8 +9,8 @@ class Image
     @row3 = [arr3]
     @row4 = [arr4]
     @image = [arr1, arr2, arr3, arr4]
-    
   end
+
   def output_image
     @image.each do |x|
       x.each do |cell|
@@ -20,7 +23,14 @@ class Image
   end
 
   def blur_image(distance)
+    # This currently only works when the array is a square 4x4.
      @length = @image.length
+      @width = 0
+      @image.each do |x|
+        x.each do |cell|
+          @width += 1
+        end
+      end
         i = 0
         j = 0
         n = distance
@@ -29,7 +39,7 @@ class Image
           j = 0         
           while i < @length
             j = 0
-            while j < @length
+            while j < @width
               if @image[i][j] == 1
 
                   # This looks down from the rows
@@ -45,7 +55,7 @@ class Image
                   end
 
                   # This looks to the right until it gets to the end.
-                  if j < @length - 1 && @image[i][j+1] == 0
+                  if @image[i][j+1] == 0
                     @image[i][j+1] = 2
                   end
 
@@ -64,7 +74,7 @@ class Image
           j = 0
           while i < @length
             j = 0
-            while j < @length
+            while j < @width
               if @image[i][j] == 2
                 @image[i][j] = 1
               end
@@ -81,10 +91,10 @@ class Image
   end
 end
 
-image = Image.new([0, 0, 0, 1],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0])
+image = Image.new([0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 1, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0])
 image.output_image
-image.blur_image(3)
+image.blur_image(2)
 image.output_image
