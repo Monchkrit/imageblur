@@ -21,9 +21,9 @@ class Image
  
     #print @image
   end
-
+  # The blur_image method will take in the number telling the program how far to blur the pixels.
+  # a 1 will blur the next pixel over, a 2 will blur two pixes and the connecting pixels.
   def blur_image(distance)
-    # This currently only works when the array is a square 4x4.
      @length = @image.length
       @width = 0
       @image.each do |x|
@@ -69,7 +69,7 @@ class Image
             end
             i += 1
           end
-
+          # This code goes back through the array and turns the temporary shade values into 1s for output.
           i = 0
           j = 0
           while i < @length
